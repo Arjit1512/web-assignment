@@ -29,6 +29,7 @@ const BarChart = ({ title, labels, data }) => {
           title: { display: true, text: title },
         },
       }}
+      className="canvas"
     />
   );
 };
