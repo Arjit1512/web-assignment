@@ -17,39 +17,19 @@ const Dashboard = ({ data }) => {
     <>
       <h1>User Metrics</h1>
       <div className="dashboard-container">
-        <div className="pie-chart-column">
-          <PieChart
-            data={generatePieData(
-              data?.dashboard?.userMetrics?.allTime.activeUser,
-              data?.dashboard?.userMetrics?.allTime.creator,
-              data?.dashboard?.userMetrics?.allTime.totalUser,
-              data?.dashboard?.userMetrics?.allTime.totalReferral
-            )}
-            title="All-Time"
-          />
-        </div>
-        <div className="pie-chart-column">
-          <PieChart
-            data={generatePieData(
-              data?.dashboard?.userMetrics?.daily.activeUser,
-              data?.dashboard?.userMetrics?.daily.creator,
-              data?.dashboard?.userMetrics?.daily.totalUser,
-              data?.dashboard?.userMetrics?.daily.totalReferral
-            )}
-            title="Daily"
-          />
-        </div>
-        <div className="pie-chart-column">
-          <PieChart
-            data={generatePieData(
-              data?.dashboard?.userMetrics?.monthly.activeUser,
-              data?.dashboard?.userMetrics?.monthly.creator,
-              data?.dashboard?.userMetrics?.monthly.totalUser,
-              data?.dashboard?.userMetrics?.monthly.totalReferral
-            )}
-            title="Monthly"
-          />
-        </div>
+      {['allTime', 'daily', 'monthly'].map((period, index) => (
+          <div className="pie-chart-column" key={index}>
+            <PieChart
+              data={generatePieData(
+                data?.dashboard?.userMetrics[period]?.activeUser,
+                data?.dashboard?.userMetrics[period]?.creator,
+                data?.dashboard?.userMetrics[period]?.totalUser,
+                data?.dashboard?.userMetrics[period]?.totalReferral
+              )}
+              title={period}
+            />
+          </div>
+        ))}
       </div>
   
       <h1>Engagement Metrics</h1>
